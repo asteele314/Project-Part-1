@@ -1,6 +1,5 @@
 from view import *
 from PyQt5.QtWidgets import *
-import csv
 
 
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
@@ -22,22 +21,27 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.water_num = 0
 
         self.label_Title.setHidden(True)
-        self.label_Bottom.setHidden(True)
+        self.label_Cookie.setHidden(True)
+        self.label_Sandwich.setHidden(True)
         self.label_Input.setHidden(True)
-        self.label_Shop.setHidden(True)
-        self.label_Exit.setHidden(True)
+        self.lineEdit_Input.setHidden(True)
+        self.label_Bottom.setHidden(True)
         self.label_BottomDots.setHidden(True)
         self.label_MiddleDots.setHidden(True)
         self.label_TopDots.setHidden(True)
-        self.lineEdit_Input.setHidden(True)
-        self.label_Cookie.setHidden(True)
-        self.label_Water.setHidden(True)
-        self.label_Sandwich.setHidden(True)
         self.button_Enter.setHidden(True)
         self.button_Enter_2.setHidden(True)
-        self.label_CartInput.setHidden(True)
-        self.lineEdit_CartInput.setHidden(True)
-        self.label_BottomLabels.setHidden(True)
+        self.label_Water.setHidden(True)
+        self.label_Exit.setHidden(True)
+        self.label_Shop.setHidden(True)
+        self.lineEdit_WaterInput.setHidden(True)
+        self.lineEdit_CookieInput.setHidden(True)
+        self.lineEdit_SandwichInput.setHidden(True)
+        self.label_CookieEnd.setHidden(True)
+        self.label_SandwichEnd.setHidden(True)
+        self.label_WaterEnd.setHidden(True)
+        self.label_Subtotal.setHidden(True)
+        self.label_Tax.setHidden(True)
 
         self.button_Enter.clicked.connect(lambda: self.enter())
         self.button_Enter_2.clicked.connect(lambda: self.enter2())
@@ -48,6 +52,22 @@ class Controller(QMainWindow, Ui_MainWindow):
         """
         Displays beginning Main Menu screen with options to go to Cart Menu screen or to Final Total screen.
         """
+        self.label_Cookie.setHidden(True)
+        self.label_Sandwich.setHidden(True)
+        self.label_BottomDots.setHidden(True)
+        self.label_MiddleDots.setHidden(True)
+        self.label_TopDots.setHidden(True)
+        self.button_Enter_2.setHidden(True)
+        self.label_Water.setHidden(True)
+        self.lineEdit_WaterInput.setHidden(True)
+        self.lineEdit_CookieInput.setHidden(True)
+        self.lineEdit_SandwichInput.setHidden(True)
+        self.label_CookieEnd.setHidden(True)
+        self.label_SandwichEnd.setHidden(True)
+        self.label_WaterEnd.setHidden(True)
+        self.label_Subtotal.setHidden(True)
+        self.label_Tax.setHidden(True)
+
         self.label_Title.setHidden(False)
         self.label_Title.setText('MAIN MENU')
         self.label_Shop.setHidden(False)
@@ -56,18 +76,6 @@ class Controller(QMainWindow, Ui_MainWindow):
         self.lineEdit_Input.setHidden(False)
         self.button_Enter.setHidden(False)
         self.label_Bottom.setText('')
-
-        self.label_Bottom.setHidden(True)
-        self.label_BottomDots.setHidden(True)
-        self.label_MiddleDots.setHidden(True)
-        self.label_TopDots.setHidden(True)
-        self.label_Cookie.setHidden(True)
-        self.label_Sandwich.setHidden(True)
-        self.label_Water.setHidden(True)
-        self.label_CartInput.setHidden(True)
-        self.lineEdit_CartInput.setHidden(True)
-        self.button_Enter_2.setHidden(True)
-        self.label_BottomLabels.setHidden(True)
 
     def enter(self) -> None:
         """
@@ -96,89 +104,138 @@ class Controller(QMainWindow, Ui_MainWindow):
         """
         Displays the foods that are available to order and allows them to be selected.
         """
-        self.label_Bottom.setHidden(True)
         self.label_Input.setHidden(True)
-        self.label_Shop.setHidden(True)
-        self.label_Exit.setHidden(True)
+        self.lineEdit_Input.setHidden(True)
+        self.label_Bottom.setHidden(True)
         self.label_BottomDots.setHidden(True)
         self.label_MiddleDots.setHidden(True)
         self.label_TopDots.setHidden(True)
-        self.lineEdit_Input.setHidden(True)
         self.button_Enter.setHidden(True)
-        self.label_BottomLabels.setHidden(True)
+        self.label_Exit.setHidden(True)
+        self.label_Shop.setHidden(True)
+        self.label_CookieEnd.setHidden(True)
+        self.label_SandwichEnd.setHidden(True)
+        self.label_WaterEnd.setHidden(True)
+        self.label_Subtotal.setHidden(True)
+        self.label_Tax.setHidden(True)
 
         self.label_Title.setHidden(False)
         self.label_Title.setText('CART MENU')
-        self.label_Water.setHidden(False)
         self.label_Cookie.setHidden(False)
         self.label_Sandwich.setHidden(False)
-        self.label_CartInput.setHidden(False)
-        self.lineEdit_CartInput.setHidden(False)
+        self.label_Water.setHidden(False)
+        self.lineEdit_SandwichInput.setHidden(False)
+        self.lineEdit_CookieInput.setHidden(False)
+        self.lineEdit_WaterInput.setHidden(False)
         self.button_Enter_2.setHidden(False)
-
-    def final_total(self) -> None:
-        """
-        Displays the final screen with total numbers of foods ordered and grand total of the cost and writes orders to a csv file.
-        """
-        self.label_Title.setHidden(True)
-        self.label_Input.setHidden(True)
-        self.lineEdit_Input.setHidden(True)
-        self.label_CartInput.setHidden(True)
-        self.lineEdit_CartInput.setHidden(True)
-        self.label_Cookie.setHidden(True)
-        self.label_Water.setHidden(True)
-        self.label_Sandwich.setHidden(True)
-        self.button_Enter.setHidden(True)
-        self.button_Enter_2.setHidden(True)
-        self.label_Bottom.setText('')
-
-        self.label_TopDots.setHidden(False)
-        self.label_MiddleDots.setHidden(False)
-        self.label_BottomDots.setHidden(False)
-        self.label_Shop.setHidden(False)
-        self.label_Exit.setHidden(False)
-        self.label_BottomLabels.setHidden(False)
-        self.label_Bottom.setHidden(False)
-
-        self.label_Shop.setText(f'({self.cookie_num}) - Cookie = ${self.cookie_num * 1.5:.2f}')
-        self.label_Exit.setText(f'({self.sandwich_num}) - Sandwich = ${self.sandwich_num * 4:.2f}')
-        self.label_BottomLabels.setText(f'({self.water_num}) - Water = ${self.water_num * 1:.2f}')
-        self.label_Bottom.setText(f'GRAND TOTAL = ${self.cookie_num*1.5 + self.sandwich_num*4 + self.water_num*1:.2f}')
-
-        pricerow = [f'${self.cookie_num*1.5:.2f}', f'${self.sandwich_num*4:.2f}', f'${self.water_num*1:.2f}']
-        with open('orders.csv', 'a', newline='') as ordersfile:
-            writer = csv.DictWriter(ordersfile, fieldnames=['Cookie Number', 'Cookie Price',
-                                                            'Sandwich Number', 'Sandwich Price',
-                                                            'Water Number', 'Water Price'])
-            writer.writerow({'Cookie Number': self.cookie_num, 'Cookie Price': pricerow[0],
-                             'Sandwich Number': self.sandwich_num, 'Sandwich Price': pricerow[1],
-                             'Water Number': self.water_num, 'Water Price': pricerow[2]})
 
     def enter2(self) -> None:
         """
         Determines which food was ordered and updates total numbers.
         """
         try:
-            if self.lineEdit_CartInput.text().strip() == '1':
-                self.lineEdit_CartInput.setText('')
-                self.label_Bottom.setHidden(False)
-                self.label_Bottom.setText('Added Cookie')
-                self.cookie_num += 1
-            elif self.lineEdit_CartInput.text().strip() == '2':
-                self.lineEdit_CartInput.setText('')
-                self.label_Bottom.setHidden(False)
-                self.label_Bottom.setText('Added Sandwich')
-                self.sandwich_num += 1
-            elif self.lineEdit_CartInput.text().strip() == '3':
-                self.lineEdit_CartInput.setText('')
-                self.label_Bottom.setHidden(False)
-                self.label_Bottom.setText('Added Water')
-                self.water_num += 1
+            cookie_input = self.lineEdit_CookieInput.text().strip()
+            sandwich_input = self.lineEdit_SandwichInput.text().strip()
+            water_input = self.lineEdit_WaterInput.text().strip()
+
+            if cookie_input == '':
+                num_cookies = 0
             else:
-                raise ZeroDivisionError
+                num_Cookies = float(cookie_input)
+                num_cookies = int(num_Cookies)
+
+            if sandwich_input == '':
+                num_sandwiches = 0
+            else:
+                num_Sandwiches = float(sandwich_input)
+                num_sandwiches = int(num_Sandwiches)
+
+            if water_input == '':
+                num_water = 0
+            else:
+                num_Water = float(water_input)
+                num_water = int(num_Water)
+
         except ZeroDivisionError:
-            self.lineEdit_CartInput.setText('')
+            self.lineEdit_CookieInput.setText('')
+            self.lineEdit_SandwichInput.setText('')
+            self.lineEdit_WaterInput.setText('')
             self.label_Bottom.setHidden(False)
-            self.label_Bottom.setText('Invalid Input!  Please Enter 1, 2, or 3.')
+            self.label_Bottom.setText('Invalid Input!  Please Enter a Number.')
+
+        except TypeError:
+            self.lineEdit_CookieInput.setText('')
+            self.lineEdit_SandwichInput.setText('')
+            self.lineEdit_WaterInput.setText('')
+            self.label_Bottom.setHidden(False)
+            self.label_Bottom.setText('Invalid Input!  Please Enter a Number.')
+
+        except:
+            self.lineEdit_CookieInput.setText('')
+            self.lineEdit_SandwichInput.setText('')
+            self.lineEdit_WaterInput.setText('')
+            self.label_Bottom.setHidden(False)
+            self.label_Bottom.setText('Invalid Input!  Please Enter a Number.')
+
         else:
+            self.lineEdit_CookieInput.setText('')
+            self.lineEdit_SandwichInput.setText('')
+            self.lineEdit_WaterInput.setText('')
+
+            self.cookie_num += num_cookies
+            self.sandwich_num += num_sandwiches
+            self.water_num += num_water
+
             self.main_menu()
+
+    def final_total(self) -> None:
+        """
+        Displays the final screen with total numbers of foods ordered and grand total of the cost.
+        """
+        self.label_Title.setHidden(True)
+        self.label_Cookie.setHidden(True)
+        self.label_Sandwich.setHidden(True)
+        self.label_Input.setHidden(True)
+        self.lineEdit_Input.setHidden(True)
+        self.button_Enter.setHidden(True)
+        self.button_Enter_2.setHidden(True)
+        self.label_Water.setHidden(True)
+        self.label_Exit.setHidden(True)
+        self.label_Shop.setHidden(True)
+        self.lineEdit_WaterInput.setHidden(True)
+        self.lineEdit_CookieInput.setHidden(True)
+        self.lineEdit_SandwichInput.setHidden(True)
+
+        self.label_BottomDots.setHidden(False)
+        self.label_MiddleDots.setHidden(False)
+        self.label_TopDots.setHidden(False)
+        self.label_Bottom.setHidden(False)
+        self.label_CookieEnd.setHidden(False)
+        self.label_SandwichEnd.setHidden(False)
+        self.label_WaterEnd.setHidden(False)
+        self.label_Subtotal.setHidden(False)
+        self.label_Tax.setHidden(False)
+
+        cookie_price = self.cookie_num * 1.5
+        sandwich_price = self.sandwich_num * 4
+        water_price = self.water_num * 1
+        subtotal = cookie_price + sandwich_price + water_price
+        tax = subtotal * 0.07
+        total = subtotal + tax
+
+        self.label_CookieEnd.setText(f'({self.cookie_num}) - Cookies = ${cookie_price:.2f}')
+        self.label_SandwichEnd.setText(f'({self.sandwich_num}) - Sandwiches = ${sandwich_price:.2f}')
+        self.label_WaterEnd.setText(f'({self.water_num}) - Waters = ${water_price:.2f}')
+        self.label_Subtotal.setText(f'SUBTOTAL = ${subtotal:.2f}')
+        self.label_Tax.setText(f'7% Sales Tax = ${tax:.2f}')
+        self.label_Bottom.setText(f'GRAND TOTAL = ${total:.2f}')
+
+def main() -> None:
+    application = QApplication([])
+    window = Controller()
+    window.show()
+    application.exec_()
+
+
+if __name__ == '__main__':
+    main()
